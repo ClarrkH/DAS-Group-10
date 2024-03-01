@@ -1,0 +1,49 @@
+---
+title: "Prevalence of Obesity"
+format: html
+editor: visual
+embed-resources: true
+chunk_output_type: console 
+---
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+
+library(ggplot2)
+library(tidyverse)
+library(tidymodels)
+library(gt)
+library(MASS)
+library(patchwork)
+library(moderndive)
+
+
+obese <- read.csv("DAProject10.csv")
+obese$Sex <- as.factor(obese$Sex)
+```
+
+## Introduction
+
+# Exploratory Analysis
+
+```{r}
+#| echo: false
+
+ ob_tbl <- obese |> 
+   summarize(
+   "Mean.Age" = mean(obese$Age),
+   "Median.Age" = median(obese$Age),
+   "SD.Age" = sd(obese$Age),
+   "Perecent.male" = mean(obese$Sex=="Male")
+ )  |>
+   gt() |>
+   fmt_number(decimals = 2)
+
+ ob_tbl
+```
+
+#  
+
+## 
