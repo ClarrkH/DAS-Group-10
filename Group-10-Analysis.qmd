@@ -25,6 +25,7 @@ obese$Sex <- as.factor(obese$Sex)
 ```
 
 ## Introduction
+In this report we are going to investigate
 
 # Exploratory Analysis
 
