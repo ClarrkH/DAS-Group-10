@@ -1,0 +1,16 @@
+Introducion
+
+Obesity is a multifaceted public health concern which not only poses individual health risks but also reflects broader
+societal patterns influenced by various factors. The Scottish Health Surveys from 2008 to 2012 gathered data on a variety 
+of socio economic and lifestyle factors, providing a comprehensive picture of the general health of the country during this 
+period.
+Using this dataset our goal is to uncover the trends and factors contributing to obesity in scotland. Specifically we want to analyse 
+if the prevalence of obesity has changed over the given years and if there are any differences in obesity by age, gender and the highest
+educational qualification of the individual.
+
+@sec-EA consists of exploratory analysis of the obesity data and explores the potential relationship between prevalance of 
+obesity and time as well as an potential impact age, sex, and education have on obesity.
+
+@sec-FA contains the results from fitting multiple logistic regression models to answer our questions of interest, which we can thenuse
+to draw our conclusoions.
+
