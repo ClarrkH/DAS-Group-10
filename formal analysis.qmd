@@ -2,7 +2,7 @@
 title: "Trends and Determinants of Obesity in Scotland: An Analysis of the 2008-2012 Scottish Health Surveys"
 format: html
 eval: true
-echo:; false
+echo: false
 editor: visual
 ---
 
