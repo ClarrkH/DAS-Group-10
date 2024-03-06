@@ -84,7 +84,7 @@ This plot shows the odds of being obese as the years go on.
 However, if we still want to use this coefficient to quantify the effect of time we would need to work out the odds scale as it is easier to interpret. to find this we simply exponentiate the log-odds:
 
 $$\frac{p}{1-p}= exp(\alpha+\beta \cdot age)$$
-So if we take exp(0.005)=1.05 This suggests the odds of a person not being obese is 1.05 times greater in a later year compared to an earlier one.
+So if we take $exp(0.005)=1.05$ This suggests the odds of a person not being obese is 1.05 times greater in a later year compared to an earlier one.
 
 
 
@@ -96,6 +96,32 @@ from this plot we can see the probability someone is not obese as time goes on.
 
 Now that we have analysed the relationship between obesity over time we can carry out formal analysis for the relationship between obesity as our response variable and Age, Sex and education as our explanatory variables.
 
-Again we will fit a logistic regression model.
+Again we will fit a logistic regression model, this time with obesity as our response variable and age, sex and highest education qualification as our explanatory variables.
+
+{r}
+mod2 <- logistic_reg()
+mod2 <- mod2 |> fit (obese_indicator~ Sex + Age + Education, data = obese) |>
+  extract_fit_engine()
+mod2 %>%
+  summary()
+
+{r}
+mod.age <- logistic_reg()
+mod.age <- mod.age |> fit (obese_indicator~ Age, data = obese) |>
+  extract_fit_engine()
+mod.age %>%
+  summary()
+
+
+Again the baseline category is the individual not being obese. We can see that the coefficient for males is negative indicating a lower chance of males not being obese. It also indicated that the log odds of  the individual not being obese increases by 0.011 for every one unit increase in age. 
+
+{r}
+plot_model(mod2, show.values = TRUE,
+           title = "", show.p = FALSE, value.offset = 0.25)
+
+{r}
+plot_model(mod.age, type = "pred", title = "Probability of indivudual being obese by age", terms="Age [all]", axis.title = c("Age", "Prob. of individual being obese"))
+
+
 
 
