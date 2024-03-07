@@ -27,7 +27,7 @@ obese <- read.csv("DAProject10.csv")
 ## Introduction {#sec-intro}
 In this report we are going to investigate
 
-# Exploratory Data Analysis {#sec-exp}
+## Exploratory Data Analysis {#sec-exp}
 
 ```{r}
 #| echo: false
@@ -111,7 +111,7 @@ ggplot(obese, aes(x = Year,
   geom_text(stat = "prop",
             position = position_fill(vjust = 0.5)) +
   labs(x = "Year", y = "Proportion",
-       title = "Proportion obese by year of Scottish Mental Survey",
+       title = "Proportion obese by year of Scottish Health Survey",
        fill = "Are they obese?") +
   scale_fill_discrete(labels = c("No", "Yes"))
 ```
