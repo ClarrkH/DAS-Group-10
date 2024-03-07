@@ -172,7 +172,7 @@ ggplot(obese, aes(y = Sex, fill = factor(Obese))) +
   geom_bar(position = "dodge") +
   coord_flip() +
   labs(x = "Count", y = "Gender", fill = "Are they obese?",
-       title = "Gender of participants in Scottish Mental Surveys between 2012-2018") +
+       title = "Gender of participants in Scottish Health Survey (2012-2018)") +
   scale_fill_discrete(labels = c("No","Yes"))
 
 # NOTE: I'd like to change the colours on this bar plot so as not to confuse the genders 
@@ -213,7 +213,7 @@ ggplot(obese, aes(x = factor(Obese), y = Age, fill = factor(Obese))) +
   geom_boxplot(alpha = 0.5, show.legend = FALSE, fill = c("darkseagreen", "honeydew")) +
   coord_flip() +
   labs(x = "Are they obese?", y = "Age (years)",
-       title = "Age of participants from Scottish Health Survey 2012-2018 by if they are Obese") +
+       title = "Age of participants from Scottish Health Survey 2012-2018 by obesity") +
   scale_x_discrete(labels = c("No", "Yes"))
 
 
