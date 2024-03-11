@@ -1,0 +1,137 @@
+---
+title: "Untitled"
+format: html
+editor: visual
+embed-resources: true
+chunk_output_type: console
+---
+
+## Formal analysis
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+
+library(dplyr)
+library(ggplot2)
+library(moderndive)
+library(gapminder)
+library(sjPlot)
+library(stats)
+library(readr)
+library(janitor)
+library(tidymodels)
+```
+
+```{r}
+#| echo: false
+
+obese <- read.csv("DAProject10.csv")
+```
+
+```{r}
+#| echo: false
+
+obese$Sex <- as.factor(obese$Sex)
+obese <- obese %>%
+  mutate(obesity_status = ifelse(BMIgroup == "Obese", 1, 0))
+obese$obesity_status <- as.factor(obese$obesity_status)
+```
+
+```{r}
+#| echo: false
+
+library(dplyr)
+library(janitor)
+obese_obesity <- obese |>
+  tabyl(obesity_status, Year) |>
+  adorn_percentages("col") |>
+  adorn_pct_formatting(digits = 1) |>
+  adorn_ns()
+
+print(obese_obesity)
+```
+
+```{r}
+#| echo: false
+
+obese_obesity_simplified <- obese %>%
+  count(Year, obesity_status)
+ggplot(obese_obesity_simplified, aes(x = Year, fill = as.factor(obesity_status), y = n)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(x = "Year", y = "Count", fill = "Obesity Status")
+```
+
+```{r}
+#| echo: false
+
+model.Year <- logistic_reg() |> 
+  set_engine("glm") |> 
+  fit(obesity_status ~ Year, data = obese) |>
+  extract_fit_engine()
+
+model.Year |>
+  summary()
+```
+
+```{r}
+#| echo: false
+
+mod.Year.coef.logodds <- model.Year |>
+                            summary() |>
+                            coef()
+```
+
+```{r}
+#| echo: false
+
+obesity.logodds.lower <- (mod.Year.coef.logodds["Year", "Estimate"] 
+                        - 1.96 * mod.Year.coef.logodds["Year", "Std. Error"])
+obesity.logodds.lower
+obesity.logodds.upper <- (mod.Year.coef.logodds["Year", "Estimate"] 
+                        + 1.96 * mod.Year.coef.logodds["Year", "Std. Error"])
+obesity.logodds.upper
+```
+
+```{r}
+#| echo: false
+
+plot <- plot_model(model.Year, show.values = TRUE, transform = NULL, title = "Probability of obesity over time", show.p = TRUE)
+plot + theme_minimal() +
+  theme(text = element_text(size = 12)) +
+  labs(caption = "Note: *p<0.05, **p<0.01, ***p<0.001")
+```
+
+```{r}
+#| echo: false
+
+p <- plot_model(model.Year, type = "pred", terms = "Year", title = "Probability of being obese across Years")
+p + labs(x = "Year", y = "Probability of being obese")
+```
+
+```{r}
+#| echo: false
+
+library(tidymodels)
+library(tidyverse)
+library(gt)
+
+model.obesity <- logistic_reg() |> 
+  set_engine("glm") |> 
+  fit(obesity_status ~ Sex + Age + Education, data = obese)
+
+model.obesity |>
+  tidy() |>
+  gt() |>
+  fmt_number(columns = everything(), decimals = 2)
+  summary(model.obesity$fit)
+```
+
+```{r}
+#| echo: false
+
+plot_model(model.obesity, show.values = TRUE, transform = NULL, 
+           title = "", show.p = FALSE)
+
+```
