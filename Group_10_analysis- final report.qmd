@@ -1,0 +1,195 @@
+---
+title: "Trends and Determinants of Obesity in Scotland: An Analysis of the 2008-2012 Scottish Health Surveys"
+author: Lena Kant (2661620K), Sophie Quinn (), Henry Clark(), Wenbo Li()
+format: html
+eval: true
+echo: false
+editor: visual
+number-sections: true
+---
+
+
+```{r}
+#| warning: false
+#| message: false
+
+library(ggplot2)
+library(tidyverse)
+library(tidymodels)
+library(gt)
+library(MASS)
+library(patchwork)
+library(moderndive)
+library(dplyr)
+library(gapminder)
+library(sjPlot)
+library(stats)
+library(readr)
+library(janitor)
+
+```
+
+```{r}
+#| warning: false
+#| message: false
+
+obese <- read_csv("H:/DAProject10 (1).csv", show_col_types = FALSE)
+
+obese$Sex <- as.factor(obese$Sex)
+
+obese<- obese|>mutate(obese_indicator = ifelse(BMIgroup == "Obese", 1, 0))
+
+obese$obese_indicator <- as.factor(obese$obese_indicator)
+
+```
+
+
+# Introduction 
+
+Obesity is a multifaceted public health concern which not only poses individual health risks but also reflects broader societal patterns influenced by various factors. The Scottish Health Surveys from 2008 to 2012 gathered data on a variety  of socio-economic and lifestyle factors, providing a comprehensive picture of the general health of the country during this  period.
+
+Using this data set our goal is to uncover the trends and factors contributing to obesity in Scotland. Specifically we want to analyse  if the prevalence of obesity has changed over the given years and if there are any differences in obesity by age, gender and the highest educational qualification of the individual.
+
+@sec-EA consists of exploratory analysis of the obesity data and explores the potential relationship between prevalence of obesity and time as well as an potential impact age, sex, and education have on obesity.
+
+@sec-FA contains the results from fitting multiple logistic regression models to answer our questions of interest, which we can then use to draw our conclusions.
+
+
+# Exploraotry Analysis {#sec-EA}
+
+
+# Formal Analysis {#sec-FA}
+
+Now that we have carried out exploratory analysis and we can see the trends in the data we want to fit a logistic regression model to the data. We will fit a separate model for each question of interest
+
+## Has the prevalence of obesity in Scotland changed over the given years?
+
+First we will analyse the obesity trends over the years.
+
+```{r}
+model.years <- logistic_reg() |> 
+  set_engine("glm")
+model.years <- model.years |> 
+  fit(obese_indicator ~ Year, data = obese) |>
+  extract_fit_engine()
+
+
+```
+
+```{r}
+#| label: tbl-modelone
+#| tbl-cap: Fitted Model output
+
+model.years |>
+  tidy() |>
+  gt() |>
+  fmt_number(columns = everything(), decimals = 3)
+  
+```
+
+
+In @tbl-modelone we can see the output from fitting a logistic regression model with obesity as the response variable and year as the explanatory variable.
+
+The baseline category for our binary response (intercept) is 0 which corresponds to the subject not being obese. This means that the estimates from the logistic regression model are for a change in the log odds scale for being obese in comparison to the response baseline which is not being obese. That is :
+
+$$ ln\frac{p}{1-p}=\alpha +\beta \cdot year = -12.1 + 0.005 \cdot year $$
+
+where:
+
+-   $p=Prob(obese)$ and
+-   $1-p = Prob( Not Obese)$
+
+Hence, the log odds of the person being obese increased by 0.005 for every one unit increase in year. This provides a point estimate of how the log odds changes by year. We can also produce a 95% confidence interval for this point estimate. @fig-interval shows this confidence interval which is (-0.01, 0.02).
+
+```{r}
+
+model.years.coef.logodds <- model.years |>
+                            summary() |>
+                            coef()
+
+obesity.logodds.lower <- (model.years.coef.logodds["Year", "Estimate"] 
+                        - 1.96 * model.years.coef.logodds["Year", "Std. Error"])
+
+obesity.logodds.upper <- (model.years.coef.logodds["Year", "Estimate"] 
+                        + 1.96 * model.years.coef.logodds["Year", "Std. Error"])
+
+
+
+```
+
+
+```{r}
+#| message: false
+#| warning: false
+#| label: fig-interval
+#| fig-cap: 95% confidence interval of  the point estimate
+
+plot_model(model.years, show.values = TRUE, transform = NULL,
+           title = "Log-Odds (Obese)", show.p = FALSE)
+```
+
+
+However, from @tbl-modelone we can see that the coefficient of year has a p value of 0.586 which means that it is not significant. Hence, there is not a significant change in obesity levels over the years given in the study.
+
+
+## Are there any differences in obesity by age, gender and education?
+
+Now that we have seen there is no relationship between obesity levels and the given time frame of our study we can carry out formal analysis for the relationship between obesity as our response variable and Age, Sex and Education as our explanatory variables.
+
+Again we will fit a logistic regression model, this time with obesity as our response variable and age, sex and highest education qualification as our explanatory variables.
+
+```{r}
+
+
+mod2 <- logistic_reg()
+mod2 <- mod2 |> fit (obese_indicator~ Sex + Age + Education, data = obese) |>
+  extract_fit_engine()
+
+
+```
+
+```{r}
+#| label: tbl-modeltwo
+#| tbl-cap: Fitted Model output
+
+mod2 |>
+  tidy() |>
+  gt() |>
+  fmt_number(columns = everything(), decimals = 5)
+ 
+```
+
+
+From @tbl-modeltwo can see that the coefficient for males is negative indicating a lower chance of males not being obese. However, the p value is 0.29681 which indicates that this variable is insignificant and obesity levels do not differ by gender.
+
+The age coefficient is positive suggesting that older people were more likely to be obese. This has a low p value so is significant in our analysis.
+
+We can also see that the coefficients for all of the levels of education are positive, with individuals who have no qualifications having the highest coefficient. This suggests that individuals with no qualifications have a highest chance of being obese compared to those who have a degree qualification. We can see that those with a Standard grade qualification have the second highest chance of being obese compared to those with a degree, followed by those with an other qualification and those with a standard grade qualification. The group least likely to be obese compared to those with a degree are the people that have a higher qualification or equivalent.
+
+```{r}
+#| message: false
+#| warning: false
+#| fig-cap: Odds of being obese 
+#| label:  fig-odds
+
+plot_model(mod2, show.values = TRUE,
+           title = "", show.p = FALSE, value.offset = 0.25)
+```
+@fig-odds shows the point estimates fro the odds for each covariate and their corresponding 95% confidence intervals.
+
+We can interpret these odds ratios. We know sex is an insignificant factor.
+
+For each year increase in an individuals age, their odds of being obese increase by 1.01.
+
+The plot suggests that People with a higher qualification or equivalent's odds of being obese are 1.17 times higher than those who have a degree.
+
+The odds of people with a HNC/D being obese is 1.28 times that of those who have a degree.
+
+The odds of people with No qualifications being obese is 1.51 times those who have a degree.
+
+The odds of an individual who has another level of qualification being obese is 1.26 times those who have a degree, an finally the odds of those who have a standard grade or equivalent qualification being obese is 1.38 times those who have a degree.
+
+# Conclusion
+
+
+In conclusion, From @sec-EA and @sec-FA we can conclude that the prevalence of obesity has not changed over the years given in the data. We can also see that there are no differences in obesity levels by gender. However, we have observed that there is a higher prevalence of obesity in older people than younger people and that there are differing obesity rates dependent on the highest educational qualification an individual as attained. 
