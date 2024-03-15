@@ -1,6 +1,6 @@
 ---
 title: "Trends and Determinants of Obesity in Scotland: An Analysis of the 2008-2012 Scottish Health Surveys"
-author: Lena Kant (2661620K), Sophie Quinn (), Henry Clark(), Wenbo Li()
+author: Lena Kant (2661620K), Sophie Quinn (), Henry Clark(), Wenbo Li(2660169L)
 format: html
 eval: true
 echo: false
@@ -155,7 +155,7 @@ mod2 |>
 
 From @tbl-modeltwo can see that the coefficient for males is negative indicating a lower chance of males not being obese. However, the p value is 0.29681 which indicates that this variable is insignificant and obesity levels do not differ by gender.
 
-The age coefficient is positive suggesting that older people were more likely to be obese. This has a low p value so is significant in our analysis.
+The age coefficient is positive suggesting that older people were more likely to be obese. This has a low p-value so is significant in our analysis.
 
 We can also see that the coefficients for all of the levels of education are positive, with individuals who have no qualifications having the highest coefficient. This suggests that individuals with no qualifications have a highest chance of being obese compared to those who have a degree qualification. We can see that those with a Standard grade qualification have the second highest chance of being obese compared to those with a degree, followed by those with an other qualification and those with a standard grade qualification. The group least likely to be obese compared to those with a degree are the people that have a higher qualification or equivalent.
 
@@ -168,7 +168,7 @@ We can also see that the coefficients for all of the levels of education are pos
 plot_model(mod2, show.values = TRUE,
            title = "", show.p = FALSE, value.offset = 0.25)
 ```
-@fig-odds shows the point estimates fro the odds for each covariate and their corresponding 95% confidence intervals.
+@fig-odds shows the point estimates for the odds for each covariate and their corresponding 95% confidence intervals.
 
 We can interpret these odds ratios. We know sex is an insignificant factor.
 
@@ -180,7 +180,7 @@ The odds of people with a HNC/D being obese is 1.28 times that of those who have
 
 The odds of people with No qualifications being obese is 1.51 times those who have a degree.
 
-The odds of an individual who has another level of qualification being obese is 1.26 times those who have a degree, an finally the odds of those who have a standard grade or equivalent qualification being obese is 1.38 times those who have a degree.
+The odds of an individual who has another level of qualification being obese is 1.26 times those who have a degree, and finally the odds of those who have a standard grade or equivalent qualification being obese is 1.38 times those who have a degree.
 
 # Conclusion
 
