@@ -55,7 +55,7 @@ Using this data set our goal is to uncover the trends and factors contributing t
 @sec-FA contains the results from fitting multiple logistic regression models to answer our questions of interest, which we can then use to draw our conclusions.
 
 
-# Exploraotry Analysis {#sec-EA}
+# Exploratory Analysis {#sec-EA}
 
 
 # Formal Analysis {#sec-FA}
