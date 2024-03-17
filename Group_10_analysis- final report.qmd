@@ -105,7 +105,7 @@ Still, if we wanted to use the estimated coefficient to quantify the effect time
 
 $$\frac{p}{1-p}=exp(-12.1+0.006\cdot year)$$
 
-To quantify the effect of age we look at $exp(0.006)=1.006$ which suggests for a difference of one year the odds of someone in the later year being obese is 1.006 times greater than those in the previous year.
+To quantify the effect of age we look at $exp(0.006)=1.006$ which suggests for a difference of one year the odds of someone in the later year being obese is 1.006 times greater than those in the previous year. this effect can be seen in the plots below.
 
 ```{r}
 #| message: false
@@ -153,7 +153,7 @@ mod2 |>
 ```
 
 
-From @tbl-modeltwo can see that the coefficient for males is negative indicating a lower chance of males not being obese. However, the p value is 0.29681 which indicates that this variable is insignificant and obesity levels do not differ by gender.
+From @tbl-modeltwo can see that the coefficient for males is negative indicating a lower chance of males not being obese. However, the p value is 0.29681 which indicates that this variable is insignificant and obesity levels do not differ significantly by gender.
 
 The age coefficient is positive suggesting that older people were more likely to be obese. This has a low p-value so is significant in our analysis.
 
