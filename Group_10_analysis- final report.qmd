@@ -33,7 +33,7 @@ library(janitor)
 #| warning: false
 #| message: false
 
-obese <- read_csv("H:/DAProject10 (1).csv", show_col_types = FALSE)
+obese <- read_csv("DAProject110.csv", show_col_types = FALSE)
 
 obese$Sex <- as.factor(obese$Sex)
 
@@ -50,7 +50,7 @@ Obesity is a multifaceted public health concern which not only poses individual 
 
 Using this data set our goal is to uncover the trends and factors contributing to obesity in Scotland. Specifically we want to analyse  if the prevalence of obesity has changed over the given years and if there are any differences in obesity by age, gender and the highest educational qualification of the individual.
 
-@sec-EA consists of exploratory analysis of the obesity data and explores the potential relationship between prevalence of obesity and time as well as an potential impact age, sex, and education have on obesity.
+@sec-EA consists of exploratory analysis of the obesity data and explores the potential relationship between prevalence of obesity and time as well as the potential impact age, sex, and education have on obesity.
 
 @sec-FA contains the results from fitting multiple logistic regression models to answer our questions of interest, which we can then use to draw our conclusions in @sec-con.
 
