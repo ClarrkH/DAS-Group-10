@@ -1,6 +1,6 @@
 ---
 title: "Trends and Determinants of Obesity in Scotland: An Analysis of the 2008-2012 Scottish Health Surveys"
-author: Lena Kant (2661620K), Sophie Quinn (), Henry Clark(), Wenbo Li(2660169L)
+author: Lena Kant (2661620K), Sophie Quinn (2647389Q), Henry Clark(2654471C), Wenbo Li(2660169L)
 format: html
 eval: true
 echo: false
