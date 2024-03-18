@@ -226,6 +226,7 @@ To quantify the effect of age we look at $exp(0.006)=1.006$ which suggests for a
 #| warning: false
 #| label: fig-interval
 #| fig-cap: 95% confidence interval of  the point estimate
+#| fig-height: 3
 
 plot_model(model.years, show.values = TRUE,
            title = "Odds (Years)", show.p = FALSE)
@@ -234,6 +235,7 @@ plot_model(model.years, show.values = TRUE,
 ```{r}
 #| label: fig-probability
 #| fig-cap: Probability of being obese
+#| fig-height: 3
 
 
 plot_model(model.years, type = "pred", terms = "Year", title = "", axis.title = c("Year", "Probability of being obese over time"))
@@ -279,6 +281,8 @@ Conversely those that have a Higher grade or equivalent and those with a  degree
 #| warning: false
 #| fig-cap: Odds of being obese 
 #| label:  fig-odds
+#| fig-height: 3
+
 
 plot_model(mod2, show.values = TRUE,
            title = "", show.p = FALSE, value.offset = 0.25)
