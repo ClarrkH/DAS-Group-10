@@ -52,7 +52,7 @@ Using this data set our goal is to uncover the trends and factors contributing t
 
 @sec-EA consists of exploratory analysis of the obesity data and explores the potential relationship between prevalence of obesity and time as well as an potential impact age, sex, and education have on obesity.
 
-@sec-FA contains the results from fitting multiple logistic regression models to answer our questions of interest, which we can then use to draw our conclusions.
+@sec-FA contains the results from fitting multiple logistic regression models to answer our questions of interest, which we can then use to draw our conclusions in @sec-con.
 
 
 # Exploratory Analysis {#sec-EA}
@@ -203,22 +203,22 @@ model.years |>
 
 In @tbl-modelone we can see the output from fitting a logistic regression model with obesity as the response variable and year as the explanatory variable.
 
-The baseline category for our binary response (intercept) is 0 which corresponds to the subject not being obese. This means that the estimates from the logistic regression model are for a change in the log odds scale for being obese in comparison to the response baseline which is not being obese. That is :
+The baseline category for our binary response (intercept) is 0 which corresponds to the subject not being obese. This means that the estimates from the logistic regression model are for a change in the log odds scale for being obese in comparison to the response baseline which is not being obese. That is:
 
-$$ ln\frac{p}{1-p}=\alpha +\beta \cdot year = -12.1 + 0.006 \cdot year $$
+$$ ln\frac{p}{1-p}=\alpha +\beta \cdot {\mathrm year} = -12.1 + 0.006 \cdot {\mathrm year} $$
 
 where:
 
--   $p=Prob(obese)$ and
--   $1-p = Prob( Not Obese)$
+-   $p={\mathbb P}({\mathrm obese})$ and
+-   $1-p = {\mathbb P}({\mathrm not obese})$
 
 Hence, the log odds of the person being obese increased by 0.006 for every one unit increase in year. This provides a point estimate of how the log odds changes by year. 
 However,  we can see that the coefficient of year has a p value of 0.586 which means that it is not significant. Hence, there is not a significant change in obesity levels over the years given in the study.
 Still, if we wanted to use the estimated coefficient to quantify the effect time (in Years) has we can look at the odds ratio. To obtain this we exponentiate the log odds.
 
-$$\frac{p}{1-p}=exp(-12.1+0.006\cdot year)$$
+$$\frac{p}{1-p}={\mathrm exp}(-12.1+0.006\cdot {\mathrm year})$$
 
-To quantify the effect of age we look at $exp(0.006)=1.006$ which suggests for a difference of one year the odds of someone in the later year being obese is 1.006 times greater than those in the previous year. this effect can be seen in the plots below.
+To quantify the effect of age we look at ${\mathrm exp}(0.006)=1.006$ which suggests for a difference of one year the odds of someone in the later year being obese is 1.006 times greater than those in the previous year. this effect can be seen in the plots below.
 
 ```{r}
 #| message: false
@@ -295,7 +295,7 @@ The odds of people with No qualifications being obese is 1.51 times those who ha
 
 The odds of an individual who has another level of qualification being obese is 1.26 times those who have a degree, and finally the odds of those who have a standard grade or equivalent qualification being obese is 1.38 times those who have a degree.
 
-# Conclusion
+# Conclusion {#sec-con}
 
 
 In conclusion, From @sec-EA and @sec-FA we can conclude that the prevalence of obesity has not changed over the years given in the data. We can also see that there are no differences in obesity levels by gender. However, we have observed that there is a higher prevalence of obesity in older people than younger people and that there are differing obesity rates dependent on the highest educational qualification an individual as attained. 
