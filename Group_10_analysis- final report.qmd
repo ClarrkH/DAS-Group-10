@@ -105,7 +105,7 @@ ggplot(obese, aes(x = Year,
 
 This plot also shows that there is no significant change between each year of the survey for the proportion of people who are obese.
 
-We would now like to observe if there are any differences in obesity by other factors, such as age, gender and education. In @tbl-prop2, we have the proportion of participants who are obese categorised into gender.
+We would now like to observe if there are any differences in obesity by other factors, such as age, gender and education. In @tbl-prop2, we have the proportion of participants who are obese categorised by gender.
 
 ```{r}
 #| echo: false
