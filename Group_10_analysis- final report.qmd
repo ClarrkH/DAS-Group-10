@@ -33,7 +33,7 @@ library(janitor)
 #| warning: false
 #| message: false
 
-obese <- read_csv("DAProject110.csv", show_col_types = FALSE)
+obese <- read_csv("DAProject10.csv", show_col_types = FALSE)
 
 obese$Sex <- as.factor(obese$Sex)
 
