@@ -265,13 +265,14 @@ mod2 |>
   fmt_number(columns = everything(), decimals = 5)
  
 ```
-
-
 From @tbl-modeltwo can see that the coefficient for males is negative indicating a lower chance of males not being obese. However, the p value is 0.29681 which indicates that this variable is insignificant and obesity levels do not differ significantly by gender.
 
-The age coefficient is positive suggesting that older people were more likely to be obese. This has a low p-value so is significant in our analysis.
+The age coefficient is positive suggesting that older people were more likely to be obese, specifically the log odds of the person being obese increase by 0.01 for every unit increase in age. However, this has a low p-value so is significant in our analysis.
 
-We can also see that the coefficients for all of the levels of education are positive, with individuals who have no qualifications having the highest coefficient. This suggests that individuals with no qualifications have a highest chance of being obese compared to those who have a degree qualification. We can see that those with a Standard grade qualification have the second highest chance of being obese compared to those with a degree, followed by those with an other qualification and those with a standard grade qualification. The group least likely to be obese compared to those with a degree are the people that have a higher qualification or equivalent.
+We can also Interpret the coefficients for the different levels of education, where we have those with an other type of qualification being the baseline. We can see for the no qualifications category, those whith a standard grade qualification and those with a HNC/D have a higher chance of being obese compared tho those with an other qualification. With those who have No qualifications having the highest chance as this category has the largest coefficient.
+
+Conversely those that have a Higher grade or equivalent and those with a  degree qualification or equivalent have a negative coefficient so thay have a smaller chance of being obese compared to those who have an other qualification, whith those witha dergee quaification haveing the coefficient with the largest magnitude so they have the smallest chance of being obese.
+
 
 ```{r}
 #| message: false
@@ -284,17 +285,13 @@ plot_model(mod2, show.values = TRUE,
 ```
 @fig-odds shows the point estimates for the odds for each covariate and their corresponding 95% confidence intervals.
 
-We can interpret these odds ratios. We know sex is an insignificant factor.
+We can interpret these odds ratios. We know sex is an insignificant factor in our analysis. For each year increase in an individuals age, their odds of being obese increase by 1.01.
+The plot suggests that the odds of people with No qualifications being obese is 1.19 times those who have an other level of qualification.
+Those who have a standard grade or equivalent qualification being obese is 1.09 times those who have an other qualification.
+The odds of people with a HNC/D being obese is 1.02 times that of those who have an other level of qualification.
+People with a higher qualification or equivalent’s odds of being obese are 0.93 times higher than those who have an othr level of qualification.
+Finally, the odds of an individual who has a degree level of qualification being obese is 0.79 times those who have an other qualification.
 
-For each year increase in an individuals age, their odds of being obese increase by 1.01.
-
-The plot suggests that People with a higher qualification or equivalent's odds of being obese are 1.17 times higher than those who have a degree.
-
-The odds of people with a HNC/D being obese is 1.28 times that of those who have a degree.
-
-The odds of people with No qualifications being obese is 1.51 times those who have a degree.
-
-The odds of an individual who has another level of qualification being obese is 1.26 times those who have a degree, and finally the odds of those who have a standard grade or equivalent qualification being obese is 1.38 times those who have a degree.
 
 # Conclusion
 
