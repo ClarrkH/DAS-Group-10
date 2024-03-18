@@ -58,8 +58,6 @@ Using this data set our goal is to uncover the trends and factors contributing t
 
 # Exploratory Analysis {#sec-EA}
 
-In this section we will be going over
-
 ```{r}
 #| echo: false
 #| warning: false
@@ -170,7 +168,7 @@ ggplot(obese, aes(x = factor(Obese), y = Age, fill = factor(Obese))) +
 
 ```
 
-@fig-box shows that there is a difference in the average age of participants who are obese and those who are not. Obese people appear to be older than non-obese on average (I would probs word this better and add some more commentary on the ranges).
+@fig-box shows that there is a difference in the average age of participants who are obese and those who are not. Obese people appear to be older than non-obese on average.
 
 # Formal Analysis {#sec-FA}
 
@@ -271,9 +269,9 @@ From @tbl-modeltwo can see that the coefficient for males is negative indicating
 
 The age coefficient is positive suggesting that older people were more likely to be obese, specifically the log odds of the person being obese increase by 0.01 for every unit increase in age. However, this has a low p-value so is significant in our analysis.
 
-We can also Interpret the coefficients for the different levels of education, where we have those with an other type of qualification being the baseline. We can see for the no qualifications category, those whith a standard grade qualification and those with a HNC/D have a higher chance of being obese compared tho those with an other qualification. With those who have No qualifications having the highest chance as this category has the largest coefficient.
+We can also Interpret the coefficients for the different levels of education, where we have those with an other type of qualification being the baseline. We can see for the no qualifications category, those with a standard grade qualification and those with a HNC/D have a higher chance of being obese compared to those with an other qualification. With those who have No qualifications having the highest chance as this category has the largest coefficient.
 
-Conversely those that have a Higher grade or equivalent and those with a  degree qualification or equivalent have a negative coefficient so thay have a smaller chance of being obese compared to those who have an other qualification, whith those witha dergee quaification haveing the coefficient with the largest magnitude so they have the smallest chance of being obese.
+Conversely those that have a Higher grade or equivalent and those with a  degree qualification or equivalent have a negative coefficient so they have a smaller chance of being obese compared to those who have an other qualification, with those with a degree qualification having the coefficient with the largest magnitude so they have the smallest chance of being obese.
 
 
 ```{r}
@@ -293,7 +291,7 @@ We can interpret these odds ratios. We know sex is an insignificant factor in ou
 The plot suggests that the odds of people with No qualifications being obese is 1.19 times those who have an other level of qualification.
 Those who have a standard grade or equivalent qualification being obese is 1.09 times those who have an other qualification.
 The odds of people with a HNC/D being obese is 1.02 times that of those who have an other level of qualification.
-People with a higher qualification or equivalent’s odds of being obese are 0.93 times higher than those who have an othr level of qualification.
+People with a higher qualification or equivalent’s odds of being obese are 0.93 times higher than those who have an other level of qualification.
 Finally, the odds of an individual who has a degree level of qualification being obese is 0.79 times those who have an other qualification.
 
 
