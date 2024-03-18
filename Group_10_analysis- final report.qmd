@@ -57,6 +57,119 @@ Using this data set our goal is to uncover the trends and factors contributing t
 
 # Exploratory Analysis {#sec-EA}
 
+In this section we will be going over
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+
+# Convert variables to factors
+
+obese$Education <- factor(obese$Education, levels = c("Other school level", "No qualifications",
+                                                      "Standard grade or equiv", "HNC/D or equiv",
+                                                      "Higher grade or equiv", "Degree or higher"))
+obese$BMIgroup <- factor(obese$BMIgroup)
+obese$Sex <- factor(obese$Sex)
+
+# Create new binary variable for obesity (1 = obese, 0 = not obese)
+
+obese$Obese <- as.integer(obese$BMIgroup == "Obese")
+
+```
+
+In @fig-bar, we have a visual comparison of each year of the survey and its corresponding obesity proportion:
+
+```{r}
+#| echo: false
+#| warning: false
+#| fig-cap: Year of Scottish Health Survey with proportions of obesity
+#| label: fig-bar
+#| fig-height: 3
+
+# Stacked bar plot of Obese by Year
+
+
+ggplot(obese, aes(x = Year, 
+                  y = after_stat(prop), 
+                  fill = factor(Obese), 
+                  by = factor(Year))) +
+  geom_bar(stat = "prop") +
+  geom_text(stat = "prop",
+            position = position_fill(vjust = 0.5)) +
+  labs(x = "Year", y = "Proportion",
+       fill = "Are they obese?") +
+  scale_fill_discrete(labels = c("No", "Yes"))
+```
+
+This plot also shows that there is no significant change between each year of the survey for the proportion of people who are obese.
+
+We would now like to observe if there are any differences in obesity by other factors, such as age, gender and education. In @tbl-prop2, we have the proportion of participants who are obese categorised into gender.
+
+```{r}
+#| echo: false
+#| warning: false
+#| tbl-cap: Proportion of people who are obese by gender
+#| label: tbl-prop2
+
+props_sex <- obese |>
+  summarize(Count = n(),
+            Proportion = sum(Obese)/n(),
+            .by = Sex)
+
+
+props_sex |>
+  gt() |>
+  fmt_number(decimals = 3, columns = Proportion) |>
+  tab_style(style = cell_text(weight = "bold"),
+            locations = cells_column_labels())
+
+```
+
+Despite there being a larger count of women than men in both categories, the proportions of obesity between the two appear to be very similar.
+
+@fig-bar3 provides a visual of these proportions in the form of a bar plot:
+
+```{r}
+#| echo: false
+#| warning: false
+#| fig-cap: Proportions of obesity by highest level of education qualification achieved
+#| label: fig-bar3
+#| fig-height: 3
+
+
+ggplot(obese, aes(x = Education, 
+                  y = after_stat(prop), 
+                  fill = factor(Obese), 
+                  by = factor(Education))) +
+  geom_bar(stat = "prop") +
+  geom_text(stat = "prop",
+            position = position_fill(vjust = 0.5)) +
+  labs(x = "Highest qualification", y = "Proportion",
+       fill = "Obese?") +
+  scale_fill_discrete(labels = c("No", "Yes")) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 0.9))
+```
+
+Next, we would like to observe if there is a relationship between a participants age and obesity.
+
+```{r}
+#| echo: false
+#| warning: false
+#| fig-cap: Box plot of participants age by obesity
+#| label: fig-box
+#| fig-height: 2
+
+ggplot(obese, aes(x = factor(Obese), y = Age, fill = factor(Obese))) +
+  geom_boxplot(alpha = 0.5, show.legend = FALSE, fill = c("darkseagreen", "honeydew")) +
+  coord_flip() +
+  labs(x = "Are they obese?", y = "Age (years)") +
+  scale_x_discrete(labels = c("No", "Yes"))
+
+
+```
+
+@fig-box shows that there is a difference in the average age of participants who are obese and those who are not. Obese people appear to be older than non-obese on average (I would probs word this better and add some more commentary on the ranges).
 
 # Formal Analysis {#sec-FA}
 
