@@ -42,6 +42,11 @@ obese<- obese|>mutate(obese_indicator = ifelse(BMIgroup == "Obese", 1, 0))
 
 obese$obese_indicator <- as.factor(obese$obese_indicator)
 
+obese$Education <- factor(obese$Education, levels = c("Other school level", "No qualifications",
+                                                      "Standard grade or equiv", "HNC/D or equiv",
+                                                      "Higher grade or equiv", "Degree or higher"))
+
+obese$Obese <- as.integer(obese$BMIgroup == "Obese")
 ```
 
 
@@ -57,25 +62,6 @@ Using this data set our goal is to uncover the trends and factors contributing t
 
 
 # Exploratory Analysis {#sec-EA}
-
-```{r}
-#| echo: false
-#| warning: false
-#| message: false
-
-# Convert variables to factors
-
-obese$Education <- factor(obese$Education, levels = c("Other school level", "No qualifications",
-                                                      "Standard grade or equiv", "HNC/D or equiv",
-                                                      "Higher grade or equiv", "Degree or higher"))
-obese$BMIgroup <- factor(obese$BMIgroup)
-obese$Sex <- factor(obese$Sex)
-
-# Create new binary variable for obesity (1 = obese, 0 = not obese)
-
-obese$Obese <- as.integer(obese$BMIgroup == "Obese")
-
-```
 
 In @fig-bar, we have a visual comparison of each year of the survey and its corresponding obesity proportion:
 
@@ -127,7 +113,7 @@ props_sex |>
 
 Despite there being a larger count of women than men in both categories, the proportions of obesity between the two appear to be very similar.
 
-@fig-bar3 provides a visual of these proportions in the form of a bar plot:
+@fig-bar3 provides a visual of the percentage of people who are obese in each education level category.
 
 ```{r}
 #| echo: false
@@ -149,6 +135,7 @@ ggplot(obese, aes(x = Education,
   scale_fill_discrete(labels = c("No", "Yes")) +
   theme(axis.text.x = element_text(angle = 45, hjust = 0.9))
 ```
+We can see that group who have no qualifications have the highest percentage of obese people an dthose with a degree or higher qualification have the lowest percentage of obese people.
 
 Next, we would like to observe if there is a relationship between a participants age and obesity.
 
@@ -297,5 +284,4 @@ Finally, the odds of an individual who has a degree level of qualification being
 
 # Conclusion
 
-
-In conclusion, From @sec-EA and @sec-FA we can conclude that the prevalence of obesity has not changed over the years given in the data. We can also see that there are no differences in obesity levels by gender. However, we have observed that there is a higher prevalence of obesity in older people than younger people and that there are differing obesity rates dependent on the highest educational qualification an individual as attained. 
+In conclusion, From @sec-EA and @sec-FA we can conclude that the prevalence of obesity has not changed over the years given in the data. We can also see that there are no differences in obesity levels by gender. However, we have observed that there is a higher prevalence of obesity in older people than younger people and that there are differing obesity rates dependent on the highest educational qualification an individual as attained. specifically those with a higher educational qualification are less likley to be obese than those with no qualifications.
