@@ -277,4 +277,6 @@ Finally, the odds of an individual who has a degree level of qualification being
 
 # Conclusion {#sec-con}
 
-In conclusion, based on our analysis the prevalence of obesity has not changed over the years given in the data. We can also see that there are no differences in obesity levels by gender. However, we have observed that there is a higher prevalence of obesity in older people than younger people and that there are differing obesity rates dependent on the highest educational qualification an individual as attained. Specifically those with a higher educational qualification are less likley to be obese than those with no qualifications.
+In conclusion, based on our analysis the prevalence of obesity has not changed over the years given in the data. We can also see that there are no differences in obesity levels by gender. However, we have observed that there is a higher prevalence of obesity in older people than younger people and that there are differing obesity rates dependent on the highest educational qualification an individual as attained. Specifically those with a higher educational qualification are less likely to be obese than those with no qualifications.
+
+For future studies, it would be interesting to investigate other factors which potentially effect obesity rates such as geographical location or poverty rates. Also, to further back up the conclusions made in this report it would have been beneficial to have access to data more extensive than the years 2012-2018.
