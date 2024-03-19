@@ -135,7 +135,7 @@ ggplot(obese, aes(x = Education,
   scale_fill_discrete(labels = c("No", "Yes")) +
   theme(axis.text.x = element_text(angle = 45, hjust = 0.9))
 ```
-We can see that group who have no qualifications have the highest percentage of obese people an dthose with a degree or higher qualification have the lowest percentage of obese people.
+We can see that group who have no qualifications have the highest percentage of obese people and those with a degree or higher qualification have the lowest percentage of obese people.
 
 Next, we would like to observe if there is a relationship between a participants age and obesity.
 
@@ -284,4 +284,4 @@ Finally, the odds of an individual who has a degree level of qualification being
 
 # Conclusion
 
-In conclusion, From @sec-EA and @sec-FA we can conclude that the prevalence of obesity has not changed over the years given in the data. We can also see that there are no differences in obesity levels by gender. However, we have observed that there is a higher prevalence of obesity in older people than younger people and that there are differing obesity rates dependent on the highest educational qualification an individual as attained. specifically those with a higher educational qualification are less likley to be obese than those with no qualifications.
+In conclusion, From @sec-EA and @sec-FA we can conclude that the prevalence of obesity has not changed over the years given in the data. We can also see that there are no differences in obesity levels by gender. However, we have observed that there is a higher prevalence of obesity in older people than younger people and that there are differing obesity rates dependent on the highest educational qualification an individual as attained. Specifically those with a higher educational qualification are less likley to be obese than those with no qualifications.
