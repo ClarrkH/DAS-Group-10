@@ -1,0 +1,94 @@
+---
+title: "Prevalance of obesity"
+format: html
+editor: visual
+embed-resources: true
+chunk_output_type: console 
+---
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+library(ggplot2)
+library(tidymodels)
+library(gt)
+library(MASS)
+library(patchwork)
+library(moderndive)
+library(tidyverse)
+
+obese <- read.csv("DAProject10.csv")
+obese$Sex <- as.factor(obese$Sex)
+obese <- obese %>%
+  mutate(obese_indicator = ifelse(BMIgroup == "Obese", 1, 0))
+obese$obese_indicator <- as.factor(obese$obese_indicator)
+
+```
+
+## Introduction
+
+# Exploratory Analysis
+
+@fig-BMIbar displays a bar chart comparing the amount of people who are obese versus not obese separated by level of education ( highest qualification achieved). From observation we can infer that none of the education groups have a higher proportion of obese people than non obese, however there does appear to be some differences in the proportions depending on education level. With the degree or higher group having the smallest proportion of obesity. Further analysis should be carried out to determine if there is a significant difference in the proportion of obesity across Education levels.
+
+```{r}
+#| echo: false
+#| label: fig-BMIbar
+#| fig-cap: Distrubution of Obesity bt education level
+
+ggplot(data = obese, aes(x = obese_indicator, fill = obese_indicator)) +
+  geom_bar() +
+  facet_wrap(.~obese$Education) +
+  scale_fill_discrete(labels = c("Not Obese", "Obese")) +
+  labs(x = "Obese Status", title = "Distrubution of obesity by education level")
+
+```
+
+@tbl-prop displays the proportions of obesity by Education level. From observation the No qualifications group has the highest proportion of obesity (36%) while the degeree or higher group has the lowest proportion (25%). This might suggest that education level can effect the prevalence of obesity with a possible relationship being the higher the level of education achieved the lower the chances of being obese.
+
+```{r}
+#| echo: false
+#| message: false
+#| label: tbl-prop
+#| tbl-cap: Proportions of obesity by education level
+
+prop_table <- obese |>
+  group_by(Education, obese_indicator) |>
+  summarise(Count = n()) |>
+  group_by(Education) |>
+  mutate(Proportion = Count / sum(Count))
+prop_table$Count <- NULL
+
+
+gt_table <- prop_table |>
+  gt() |>
+  tab_header(
+    title = "Proportions of Obesity by Education"
+  ) |>
+  cols_label(
+    Education = "Education",
+    obese_indicator = "Education Level",
+    Proportion = "Proportion(%)"
+  ) |>
+  tab_spanner(
+    label = "",
+    columns = c(Proportion)
+  ) |>
+  fmt_number(decimals = 2)
+gt_table
+```
+
+@fig-barsex displays the Proportions of obesity by Sex. The distributions of obesity across males and females appears to be relatively similar with a slightl higher proprtion of obese males thasn females. Further analysis would need to be carried out to see if obesity proportion differs between Sex.
+
+```{r}
+#| echo: false
+#| label: fig-barsex
+#| fig-cap: Barplot of Obesity proportions by Sex
+
+ggplot(data = obese, aes(x = obese_indicator, fill = Sex)) +
+  geom_bar() +
+  facet_wrap(.~Sex) +
+  labs(x = "Obese Status", title = "Obesity proportion by Sex")
+
+```
